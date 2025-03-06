@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using GestionDePersonalHostpital;
 
 namespace GestionHospital
 {
@@ -16,13 +15,17 @@ namespace GestionHospital
         public static List<Persona> PersonasEnElHospital = new List<Persona>()
         {
             new Medico("5552233B", 35, "Paco", "Gafotas", 699999999, Especialidades.MedicoGeneral),
-            new Paciente("12", 12, "fermin", "galgo", 633443344, "Dolor cabeza")
+            new Paciente("12", 12, "fermin", "galgo", 633443344, "Dolor cabeza"),
+            new Paciente("º1", 89, "Franco", "Olvidado", 687442233, "Disparo en la cabeza")
+
         };
 
 
         [STAThread]
         static void Main()
         {
+            ((Paciente)PersonasEnElHospital[2]).medico = (Medico)PersonasEnElHospital[0];
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Menu());
@@ -32,7 +35,7 @@ namespace GestionHospital
             if (dni == excepcionDNI)
             {
                 MessageBox.Show("Esa persona no se puede elegir, usa otro dni");
-
+                return null;
             }
 
             var persona = PersonasEnElHospital.OfType<P>()
@@ -40,8 +43,7 @@ namespace GestionHospital
 
             if (persona != null)
                 return persona;
-            else
-                MessageBox.Show("No se encontraron personas con el mismo DNI.");
+            
 
             return null;
         }

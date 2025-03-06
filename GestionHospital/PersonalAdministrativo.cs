@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GestionDePersonalHostpital
+namespace GestionHospital
 {
     enum CargoAdministrativo { recepcionista, coordinador, secretario}
     internal class PersonalAdministrativo : Persona

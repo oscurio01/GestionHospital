@@ -71,6 +71,7 @@
     <Compile Include="PersonalAdministrativo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Recopia.cs" />
     <EmbeddedResource Include="Buscador.resx">
       <DependentUpon>Buscador.cs</DependentUpon>
     </EmbeddedResource>

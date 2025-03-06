@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GestionDePersonalHostpital
+namespace GestionHospital
 {
     internal class Persona
     {
@@ -37,62 +37,23 @@ namespace GestionDePersonalHostpital
             return $"DNI:{DNI}, Nombre: {Nombre} {Apellido}, edad {Edad}, telefono {Telefono}";
         }
 
-        public static Persona DarAltaPersona(List<Persona> listaDni)
+        public static Persona DarAltaPersona(string DNI, string Nombre, string Apellido, int Edad, int Telefono)
         {
-            bool salir = true;
             int edad, telefono;
             string dni = "", nombre, apellido;
             Persona p;
 
-            Console.Write("Dime su DNI\n> ");
-            while (salir)
-            {
-                salir = false;
-                dni = Console.ReadLine();
+            dni = DNI;
 
-                // Verificar que el DNI no esté repetido
-                foreach (Persona persona in listaDni)
-                {
-                    if (persona.DNI == dni)
-                    {
-                        salir = true;
-                        Console.WriteLine("Ese DNI ya existe usa otro");
-                    }
-                    else if (dni.Length > 8)
-                    {
-                        salir = true;
-                        Console.WriteLine("No existe un DNI tan largo vuelve lo a intentar");
-                    }
-                }
+            edad = Edad;
 
-            }
+            nombre = Nombre;
 
-            Console.WriteLine("Dime su edad");
-            edad = LeerUnNumeroCorrecto(100, 0, "No existe nadie con esa edad, prueba de nuevo");
+            apellido = Apellido;
 
-            Console.Write("Dime su nombre\n> ");
-            nombre = Console.ReadLine();
-
-            Console.Write("Y el apellido\n> ");
-            apellido = Console.ReadLine();
-
-            Console.WriteLine("Escribe el telefono");
-            telefono = LeerUnNumeroCorrecto(699999999, 600000000, "No existe numero de telefono en españa así");
+            telefono = Telefono;
 
             return p = new Persona(dni, edad, nombre, apellido, telefono);
-        }
-
-        static int LeerUnNumeroCorrecto(int maximo, int minimo = 0, string texto = "Numero no valido")
-        {
-            int numeroCorrecto;
-            while (true)
-            {
-                Console.Write("> ");
-                if (int.TryParse(Console.ReadLine(), out numeroCorrecto) && numeroCorrecto >= minimo && numeroCorrecto <= maximo)
-                    return numeroCorrecto;
-                else
-                    Console.WriteLine(texto);
-            }
         }
     }
 }
