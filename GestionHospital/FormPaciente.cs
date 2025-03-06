@@ -30,7 +30,11 @@ namespace GestionHospital
         private void FormPaciente_Load(object sender, EventArgs e)
         {
             if (comboBuscador.SelectedIndex != -1)
+            {
                 comboBuscador.SelectedIndex = 0;
+                comboBuscador.ValueMember = "DNI";
+            }
+
             if(comboMedicName.SelectedIndex != -1)
                 comboMedicName.SelectedIndex = 0;
         }
@@ -64,7 +68,8 @@ namespace GestionHospital
             txtApellido.Text = paciente.Apellido;
             numTelefono.Value = paciente.Telefono;
             numEdad.Value = paciente.Edad;
-            comboMedicName.Text = paciente.medico.Nombre;
+            if(paciente.medico != null)
+                comboMedicName.Text = paciente.medico.Nombre;
             textSintomas.Text = paciente.Sintoma;
 
         }
