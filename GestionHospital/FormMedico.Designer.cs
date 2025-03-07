@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.comboBuscador = new System.Windows.Forms.ComboBox();
             this.butCrear = new System.Windows.Forms.Button();
             this.butBorrar = new System.Windows.Forms.Button();
@@ -42,15 +43,16 @@
             this.txtDNI = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.txtApellido = new System.Windows.Forms.TextBox();
-            this.listPacientes = new System.Windows.Forms.ListBox();
             this.label9 = new System.Windows.Forms.Label();
             this.numEdad = new System.Windows.Forms.NumericUpDown();
             this.numTelefono = new System.Windows.Forms.NumericUpDown();
             this.butAplicar = new System.Windows.Forms.Button();
             this.butAnadirPaciente = new System.Windows.Forms.Button();
             this.comboPaciente = new System.Windows.Forms.ComboBox();
+            this.dataGridPaciente = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.numEdad)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTelefono)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridPaciente)).BeginInit();
             this.SuspendLayout();
             // 
             // comboBuscador
@@ -122,7 +124,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(5, 199);
+            this.label4.Location = new System.Drawing.Point(5, 193);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(65, 20);
@@ -144,7 +146,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(224, 199);
+            this.label6.Location = new System.Drawing.Point(222, 190);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(99, 20);
@@ -169,7 +171,7 @@
             this.comboEspecialidad.Enabled = false;
             this.comboEspecialidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboEspecialidad.FormattingEnabled = true;
-            this.comboEspecialidad.Location = new System.Drawing.Point(321, 195);
+            this.comboEspecialidad.Location = new System.Drawing.Point(321, 187);
             this.comboEspecialidad.Margin = new System.Windows.Forms.Padding(2);
             this.comboEspecialidad.Name = "comboEspecialidad";
             this.comboEspecialidad.Size = new System.Drawing.Size(169, 28);
@@ -200,26 +202,11 @@
             // 
             this.txtApellido.Enabled = false;
             this.txtApellido.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtApellido.Location = new System.Drawing.Point(72, 195);
+            this.txtApellido.Location = new System.Drawing.Point(72, 187);
             this.txtApellido.Margin = new System.Windows.Forms.Padding(2);
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(138, 26);
             this.txtApellido.TabIndex = 15;
-            // 
-            // listPacientes
-            // 
-            this.listPacientes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.listPacientes.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listPacientes.FormattingEnabled = true;
-            this.listPacientes.HorizontalScrollbar = true;
-            this.listPacientes.ItemHeight = 20;
-            this.listPacientes.Location = new System.Drawing.Point(10, 330);
-            this.listPacientes.Margin = new System.Windows.Forms.Padding(2);
-            this.listPacientes.Name = "listPacientes";
-            this.listPacientes.Size = new System.Drawing.Size(774, 104);
-            this.listPacientes.TabIndex = 17;
-            this.listPacientes.DoubleClick += new System.EventHandler(this.listPacientes_DoubleClick);
             // 
             // label9
             // 
@@ -235,7 +222,7 @@
             // numEdad
             // 
             this.numEdad.Enabled = false;
-            this.numEdad.Location = new System.Drawing.Point(321, 149);
+            this.numEdad.Location = new System.Drawing.Point(321, 146);
             this.numEdad.Margin = new System.Windows.Forms.Padding(2);
             this.numEdad.Name = "numEdad";
             this.numEdad.Size = new System.Drawing.Size(90, 20);
@@ -290,20 +277,43 @@
             this.comboPaciente.Name = "comboPaciente";
             this.comboPaciente.Size = new System.Drawing.Size(172, 28);
             this.comboPaciente.TabIndex = 28;
-            this.comboPaciente.SelectedIndexChanged += new System.EventHandler(this.comboPaciente_SelectedIndexChanged);
+            // 
+            // dataGridPaciente
+            // 
+            this.dataGridPaciente.AllowUserToAddRows = false;
+            this.dataGridPaciente.AllowUserToDeleteRows = false;
+            this.dataGridPaciente.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridPaciente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridPaciente.Location = new System.Drawing.Point(10, 331);
+            this.dataGridPaciente.Name = "dataGridPaciente";
+            this.dataGridPaciente.ReadOnly = true;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridPaciente.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridPaciente.ShowCellErrors = false;
+            this.dataGridPaciente.Size = new System.Drawing.Size(773, 103);
+            this.dataGridPaciente.TabIndex = 29;
+            this.dataGridPaciente.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridPaciente_CellDoubleClick);
             // 
             // FormMedico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(814, 458);
+            this.ClientSize = new System.Drawing.Size(814, 475);
+            this.Controls.Add(this.dataGridPaciente);
             this.Controls.Add(this.comboPaciente);
             this.Controls.Add(this.butAplicar);
             this.Controls.Add(this.numTelefono);
             this.Controls.Add(this.numEdad);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.butAnadirPaciente);
-            this.Controls.Add(this.listPacientes);
             this.Controls.Add(this.txtApellido);
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.txtDNI);
@@ -324,6 +334,7 @@
             this.Load += new System.EventHandler(this.FormPaciente_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numEdad)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTelefono)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridPaciente)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -345,12 +356,12 @@
         private System.Windows.Forms.TextBox txtDNI;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.TextBox txtApellido;
-        private System.Windows.Forms.ListBox listPacientes;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.NumericUpDown numEdad;
         private System.Windows.Forms.NumericUpDown numTelefono;
         private System.Windows.Forms.Button butAplicar;
         private System.Windows.Forms.Button butAnadirPaciente;
         private System.Windows.Forms.ComboBox comboPaciente;
+        private System.Windows.Forms.DataGridView dataGridPaciente;
     }
 }

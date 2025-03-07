@@ -209,6 +209,8 @@ namespace GestionHospital
 
         private void butAplicar_Click(object sender, EventArgs e)
         {
+            // Al presionar al boton aplicar te pregunta si estas seguro
+            // de que quieres aplicar los cambios
             if (MessageBox.Show("Quieres guardar los datos modificados?", "", MessageBoxButtons.YesNo) == DialogResult.No)
                 return;
 
@@ -219,10 +221,10 @@ namespace GestionHospital
                 MessageBox.Show("Por favor rellena el dni, nombre, apellido, edad y medico");
                 return;
             }
-
+            // Crea el paciente
             if (crear)
                 DarAltaPaciente(sender, e);
-
+            // Modifica el paciente actual
             if (modificar)
                 ModificarDatosPaciente(sender, e);
 
@@ -240,6 +242,7 @@ namespace GestionHospital
             txtApellido.Text = paciente.Apellido;
             numTelefono.Value = paciente.Telefono;
             numEdad.Value = paciente.Edad;
+            // comprueba si tiene medico y le indica al drop de medico su ubicacion
             if (paciente.medico != null)
             {
                 comboMedicName.Text = paciente.medico.Nombre;
@@ -259,10 +262,10 @@ namespace GestionHospital
                     listCitas.Items.Add(citas);
                     listCitas.DisplayMember = citas.ToString();
                 }
-
                 listCitas.SelectedIndex = 0;
-
             }
+            else
+                txtNotas.Text = string.Empty;
 
         }
 
@@ -312,7 +315,7 @@ namespace GestionHospital
             {
                 listCitas.Items.Add(citas);
             }
-
+            
             comboBuscador.SelectedIndex = comboBuscador.Items.IndexOf(paciente);
         }
 

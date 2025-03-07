@@ -126,7 +126,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(5, 199);
+            this.label4.Location = new System.Drawing.Point(7, 191);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(65, 20);
@@ -148,7 +148,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(224, 201);
+            this.label6.Location = new System.Drawing.Point(222, 191);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(60, 20);
@@ -186,7 +186,7 @@
             this.comboMedicName.Enabled = false;
             this.comboMedicName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboMedicName.FormattingEnabled = true;
-            this.comboMedicName.Location = new System.Drawing.Point(298, 193);
+            this.comboMedicName.Location = new System.Drawing.Point(298, 188);
             this.comboMedicName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboMedicName.Name = "comboMedicName";
             this.comboMedicName.Size = new System.Drawing.Size(138, 28);
@@ -217,7 +217,7 @@
             // 
             this.txtApellido.Enabled = false;
             this.txtApellido.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtApellido.Location = new System.Drawing.Point(72, 195);
+            this.txtApellido.Location = new System.Drawing.Point(72, 187);
             this.txtApellido.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(138, 26);
@@ -229,10 +229,12 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listCitas.FormattingEnabled = true;
+            this.listCitas.HorizontalScrollbar = true;
             this.listCitas.Location = new System.Drawing.Point(10, 330);
             this.listCitas.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.listCitas.Name = "listCitas";
             this.listCitas.Size = new System.Drawing.Size(774, 121);
+            this.listCitas.Sorted = true;
             this.listCitas.TabIndex = 17;
             this.listCitas.SelectedIndexChanged += new System.EventHandler(this.listCitas_SelectedIndexChanged);
             this.listCitas.DoubleClick += new System.EventHandler(this.listCitas_DoubleClick);
@@ -272,6 +274,7 @@
             this.txtNotas.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtNotas.Multiline = true;
             this.txtNotas.Name = "txtNotas";
+            this.txtNotas.ReadOnly = true;
             this.txtNotas.Size = new System.Drawing.Size(776, 99);
             this.txtNotas.TabIndex = 20;
             // 
@@ -316,7 +319,7 @@
             this.numEdad.Location = new System.Drawing.Point(298, 148);
             this.numEdad.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.numEdad.Name = "numEdad";
-            this.numEdad.Size = new System.Drawing.Size(90, 20);
+            this.numEdad.Size = new System.Drawing.Size(58, 20);
             this.numEdad.TabIndex = 25;
             // 
             // numTelefono
