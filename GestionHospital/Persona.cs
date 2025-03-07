@@ -34,7 +34,7 @@ namespace GestionHospital
 
         public override string ToString()
         {
-            return $"DNI:{DNI}, Nombre: {Nombre} {Apellido}, edad {Edad}, telefono {Telefono}";
+            return $"DNI:{DNI}, Nombre: {Nombre} {Apellido}, edad: {Edad}, telefono: {Telefono}";
         }
 
         public static Persona DarAltaPersona(string DNI, string Nombre, string Apellido, int Edad, int Telefono)

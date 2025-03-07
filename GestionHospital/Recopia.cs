@@ -258,13 +258,13 @@ namespace GestionHospital
 
         static void ListaDePacientes(Medico medico)
         {
-            if (medico.Pacientes.Count == 0)
-                Console.WriteLine("Este medico no tiene ningun paciente a su cargo");
+            //if (medico.Pacientes.Count == 0)
+            //    Console.WriteLine("Este medico no tiene ningun paciente a su cargo");
 
-            foreach (var persona in medico.Pacientes)
-            {
-                Console.WriteLine(persona.ToString());
-            }
+            //foreach (var persona in medico.Pacientes)
+            //{
+            //    Console.WriteLine(persona.ToString());
+            //}
         }
 
         static void DarDeBajaPaciente()
@@ -287,13 +287,13 @@ namespace GestionHospital
 
             Paciente paciente = LeerDNIExacto<Paciente>();
 
-            var medico = PersonasEnElHospital.OfType<Medico>()
-                .FirstOrDefault(m => m.Pacientes.Any(p => p == paciente));
+            //var medico = PersonasEnElHospital.OfType<Medico>()
+            //    .FirstOrDefault(m => m.Pacientes.Any(p => p == paciente));
 
-            if (medico != null)
-                medico.QuitarPaciente(paciente);
-            else
-                Console.WriteLine("No se encontraron médicos con pacientes con el mismo DNI.");
+            //if (medico != null)
+            //    medico.QuitarPaciente(paciente);
+            //else
+            //    Console.WriteLine("No se encontraron médicos con pacientes con el mismo DNI.");
 
             Console.WriteLine("Se ha eliminado a {0}", paciente.ToString());
             PersonasEnElHospital.Remove(paciente);
@@ -343,38 +343,38 @@ namespace GestionHospital
             Medico medico = LeerDNIExacto<Medico>();
 
             // Rehasigna a los pacientes a otro medico
-            if (medico.Pacientes.Count > 0 && PersonasEnElHospital.OfType<Medico>().Count() != 1)
-            {
-                Console.WriteLine("Reasigna los pacientes a otros medicos: ");
-                foreach (var paciente in medico.Pacientes)
-                {
-                    Console.WriteLine(paciente.ToString());
-                }
-                Console.WriteLine("\nA que medico se los asignas: ");
-                foreach (var medic in PersonasEnElHospital.OfType<Medico>())
-                {
-                    if (medic.DNI != medico.DNI)
-                        Console.WriteLine(medic.ToString());
-                }
+            //if (medico.Pacientes.Count > 0 && PersonasEnElHospital.OfType<Medico>().Count() != 1)
+            //{
+            //    Console.WriteLine("Reasigna los pacientes a otros medicos: ");
+            //    foreach (var paciente in medico.Pacientes)
+            //    {
+            //        Console.WriteLine(paciente.ToString());
+            //    }
+            //    Console.WriteLine("\nA que medico se los asignas: ");
+            //    foreach (var medic in PersonasEnElHospital.OfType<Medico>())
+            //    {
+            //        if (medic.DNI != medico.DNI)
+            //            Console.WriteLine(medic.ToString());
+            //    }
 
-                Medico NuevoMedico = LeerDNIExacto<Medico>(medico.DNI);
-                // El nuevo medico adquiere los pacientes del anterior
-                foreach (var pacientes in medico.Pacientes)
-                {
-                    pacientes.AñadirMedico(NuevoMedico);
-                }
+            //    Medico NuevoMedico = LeerDNIExacto<Medico>(medico.DNI);
+            //    // El nuevo medico adquiere los pacientes del anterior
+            //    foreach (var pacientes in medico.Pacientes)
+            //    {
+            //        pacientes.AñadirMedico(NuevoMedico);
+            //    }
 
-                NuevoMedico.AñadirPacientes(medico.Pacientes);
-            }
-            // Si no hay mas medico los pacientes se quedan sin medicos y mueren
-            if (PersonasEnElHospital.OfType<Medico>().Count() == 1)
-            {
-                foreach (var pacientes in medico.Pacientes)
-                {
-                    pacientes.QuitarMedico();
-                    PersonasEnElHospital.Remove(pacientes);
-                }
-            }
+            //    NuevoMedico.AñadirPacientes(medico.Pacientes);
+            //}
+            //// Si no hay mas medico los pacientes se quedan sin medicos y mueren
+            //if (PersonasEnElHospital.OfType<Medico>().Count() == 1)
+            //{
+            //    foreach (var pacientes in medico.Pacientes)
+            //    {
+            //        pacientes.QuitarMedico();
+            //        PersonasEnElHospital.Remove(pacientes);
+            //    }
+            //}
 
             Console.WriteLine("Se ha eliminado a {0}", medico.ToString());
             PersonasEnElHospital.Remove(medico);
@@ -487,7 +487,7 @@ namespace GestionHospital
                         Medico antiguoMedico = paciente.medico;
                         Medico nuevoMedico = LeerDNIExacto<Medico>(paciente.medico.DNI);
 
-                        antiguoMedico.QuitarPaciente(paciente);
+                        //antiguoMedico.QuitarPaciente(paciente);
                         paciente.AñadirMedico(nuevoMedico);
                         break;
                 }

@@ -16,8 +16,8 @@ namespace GestionHospital
         {
             new Medico("5552233B", 35, "Paco", "Gafotas", 699999999, Especialidades.MedicoGeneral),
             new Paciente("12", 12, "fermin", "galgo", 633443344, "Dolor cabeza"),
-            new Paciente("º1", 89, "Franco", "Olvidado", 687442233, "Disparo en la cabeza")
-
+            new Paciente("º1", 89, "Franco", "Olvidado", 687442233, "Disparo en la cabeza"),
+            new Medico("º123", 35, "Fran", "Gafotas", 0134, Especialidades.Hematologo)
         };
 
 
@@ -25,7 +25,6 @@ namespace GestionHospital
         static void Main()
         {
             ((Paciente)PersonasEnElHospital[2]).medico = (Medico)PersonasEnElHospital[0];
-            ((Medico)PersonasEnElHospital[0]).AñadirPaciente((Paciente)PersonasEnElHospital[2]);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

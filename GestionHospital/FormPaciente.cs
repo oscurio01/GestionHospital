@@ -63,12 +63,14 @@ namespace GestionHospital
                 butAplicar.Visible = true;
                 butBorrar.Enabled = false;
                 comboBuscador.Enabled = false;
+                butCrearCita.Enabled = false;
+                butBorrarCita.Enabled = false;
 
                 txtDNI.Text = string.Empty;
                 txtNombre.Text = string.Empty;
                 txtApellido.Text = string.Empty;
-                numTelefono.Text = string.Empty;
-                numEdad.Text = string.Empty;
+                numTelefono.Value = 0;
+                numEdad.Value = 0;
                 comboMedicName.Text = string.Empty;
                 textSintomas.Text = string.Empty;
                 txtNotas.Text = string.Empty;
@@ -80,6 +82,8 @@ namespace GestionHospital
                 butModificar.Enabled = true;
                 butAplicar.Visible = false;
                 butBorrar.Enabled = true;
+                butCrearCita.Enabled = true;
+                butBorrarCita.Enabled = true;
                 comboBuscador.Enabled = true;
                 comboBuscador.SelectedIndex = 0;
                 comboBuscar_SelectedIndexChanged(sender, e);
@@ -117,7 +121,7 @@ namespace GestionHospital
             p = Persona.DarAltaPersona(txtDNI.Text, txtNombre.Text, txtApellido.Text, (int)numEdad.Value, (int)numTelefono.Value);
 
             Paciente paciente = new Paciente(p, textSintomas.Text, medico);
-            medico.AñadirPaciente(paciente);
+            paciente.AñadirMedico(medico);
             Program.PersonasEnElHospital.Add(paciente);
             comboBuscador.Items.Add(paciente);
 
@@ -135,7 +139,6 @@ namespace GestionHospital
                 butAplicar.Visible = true;
                 butCrear.Enabled = false;
                 butBorrar.Enabled = false;
-
             }
             else // Implica cancelar la modificacion
             {
@@ -161,25 +164,18 @@ namespace GestionHospital
         {
             // sacar al paciente de la lista de PersonasEnElHospital para que su dni no cuente
             // y el Leerdni se vuelva loco
+            Paciente antiguoPaciente = this.paciente;
             Persona p;
-            p = Program.LeerDNIExacto<Persona>(txtDNI.Text);
+            p = this.paciente;
 
             Program.PersonasEnElHospital.Remove(p);
             comboBuscador.Items.Remove(p);
+            antiguoPaciente.QuitarMedico();
 
             //Consigue los datos de una persona y los aplica al paciente
             p = Persona.DarAltaPersona(txtDNI.Text, txtNombre.Text, txtApellido.Text, (int)numEdad.Value, (int)numTelefono.Value);
 
-
-
             Paciente paciente = new Paciente(p, textSintomas.Text, medico);
-
-            Medico antiguoMedico = this.paciente.medico;
-            Medico nuevoMedico = Program.LeerDNIExacto<Medico>(paciente.medico.DNI);
-
-            antiguoMedico.QuitarPaciente(paciente);
-            paciente.AñadirMedico(nuevoMedico);
-
 
             Program.PersonasEnElHospital.Add(paciente);
             comboBuscador.Items.Add(paciente);
@@ -200,14 +196,10 @@ namespace GestionHospital
             if(MessageBox.Show("Estas seguro de borrar a este parciente?", "Borrar paciente", MessageBoxButtons.YesNo) == DialogResult.No)
                 return;
 
-            Persona p;
-            p = Program.LeerDNIExacto<Persona>(txtDNI.Text);
+            Paciente p;
+            p = Program.LeerDNIExacto<Paciente>(txtDNI.Text);
 
-            var medico = Program.PersonasEnElHospital.OfType<Medico>()
-    .FirstOrDefault(m => m.Pacientes.Any(x => x == p));
-
-            if (medico != null)
-                medico.QuitarPaciente(paciente);
+            p.QuitarMedico();
 
             comboBuscador.Items.Remove(p);
             Program.PersonasEnElHospital.Remove(p);
@@ -249,7 +241,10 @@ namespace GestionHospital
             numTelefono.Value = paciente.Telefono;
             numEdad.Value = paciente.Edad;
             if (paciente.medico != null)
+            {
                 comboMedicName.Text = paciente.medico.Nombre;
+                comboMedicName.SelectedIndex = comboMedicName.Items.IndexOf(paciente.medico);
+            }
             else
                 comboMedicName.Text = string.Empty;
             textSintomas.Text = paciente.Sintoma;
@@ -335,6 +330,8 @@ namespace GestionHospital
 
         private void listCitas_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (listCitas.Items.Count <= 0 || listCitas.SelectedIndex == -1)
+                return;
             txtNotas.Text = ((Cita)listCitas.Items[listCitas.SelectedIndex]).Notas;
         }
     }

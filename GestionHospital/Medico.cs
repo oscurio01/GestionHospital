@@ -23,7 +23,6 @@ namespace GestionHospital
     internal class Medico : Persona
     {
         public Especialidades Especialidad {  get; set; }
-        public List<Paciente> Pacientes { get; set; } = new List<Paciente>();
 
         public Medico(string dNI, int edad, string nombre, string apellido, int telefono, Especialidades especialidad) : base(dNI, edad, nombre, apellido, telefono)
         {
@@ -38,21 +37,6 @@ namespace GestionHospital
         public override string ToString()
         {
             return base.ToString() + $", especialidad {Especialidad}."; 
-        }
-
-        public void AñadirPaciente(Paciente paciente)
-        {
-            Pacientes.Add(paciente);
-            paciente.medico = this;
-        }
-        public void AñadirPacientes(List<Paciente> pacientes)
-        {
-            Pacientes.AddRange(pacientes);
-        }
-
-        public void QuitarPaciente(Paciente paciente)
-        {
-            Pacientes.Remove(paciente);
         }
         
     }

@@ -12,8 +12,8 @@ namespace GestionHospital
 {
     public partial class FormMedico : Form
     {
-        bool crear = false;
-        bool modificar = false;
+        bool esCrear = false;
+        bool esModificar = false;
 
         Paciente paciente {  get; set; }
         Medico medico { get; set; }
@@ -64,9 +64,9 @@ namespace GestionHospital
         private void butCrear_Click(object sender, EventArgs e)
         {
             // Al presionar el boton se guardara las opciones que hayas puesto en el form
-            crear = !crear;
+            esCrear = !esCrear;
 
-            if (crear)
+            if (esCrear)
             {
                 butCrear.Text = "Cancelar";
                 butModificar.Enabled = false;
@@ -81,10 +81,9 @@ namespace GestionHospital
                 txtDNI.Text = string.Empty;
                 txtNombre.Text = string.Empty;
                 txtApellido.Text = string.Empty;
-                numTelefono.Text = string.Empty;
-                numEdad.Text = string.Empty;
+                numTelefono.Value = 0;
+                numEdad.Value = 0;
                 comboEspecialidad.Text = string.Empty;
-                txtNotas.Text = string.Empty;
                 listPacientes.Items.Clear();
 
             }
@@ -98,19 +97,18 @@ namespace GestionHospital
 
                 comboBuscador.Enabled = true;
                 comboPaciente.Enabled = true;
-                if(comboPaciente.Items.Count >= 0)
+                if(comboPaciente.Items.Count > 0)
                     comboPaciente.SelectedIndex = 0;
                 comboBuscador.SelectedIndex = 0;
                 comboBuscar_SelectedIndexChanged(sender, e);
             }
 
-            txtDNI.Enabled = crear;
-            txtNombre.Enabled = crear;
-            txtApellido.Enabled = crear;
-            numTelefono.Enabled = crear;
-            numEdad.Enabled = crear;
-            comboEspecialidad.Enabled = crear;
-            txtNotas.Enabled = crear;
+            txtDNI.Enabled = esCrear;
+            txtNombre.Enabled = esCrear;
+            txtApellido.Enabled = esCrear;
+            numTelefono.Enabled = esCrear;
+            numEdad.Enabled = esCrear;
+            comboEspecialidad.Enabled = esCrear;
 
         }
 
@@ -130,8 +128,6 @@ namespace GestionHospital
 
             Medico medico = new Medico(p, (Especialidades)comboEspecialidad.SelectedIndex);
 
-            medico.AñadirPacientes(listPacientes.Items.Cast<Paciente>().ToList());
-
             Program.PersonasEnElHospital.Add(medico);
             comboBuscador.Items.Add(medico);
 
@@ -141,9 +137,9 @@ namespace GestionHospital
 
         private void butModificar_Click(object sender, EventArgs e)
         {
-            modificar = !modificar;
+            esModificar = !esModificar;
 
-            if (modificar)
+            if (esModificar)
             {
                 butModificar.Text = "Cancelar";
                 butAplicar.Visible = true;
@@ -162,36 +158,42 @@ namespace GestionHospital
                 butBorrar.Enabled = true;
                 butAnadirPaciente.Enabled = true;
                 comboPaciente.Enabled = true;
-                comboPaciente.SelectedIndex = 0;
+                if (comboPaciente.Items.Count > 0)
+                    comboPaciente.SelectedIndex = 0;
                 comboBuscar_SelectedIndexChanged(sender, e);
             }
 
-            txtDNI.Enabled = modificar;
-            txtNombre.Enabled = modificar;
-            txtApellido.Enabled = modificar;
-            numTelefono.Enabled = modificar;
-            numEdad.Enabled = modificar;
-            comboEspecialidad.Enabled = modificar;
-            txtNotas.Enabled = modificar;
-
+            txtDNI.Enabled = esModificar;
+            txtNombre.Enabled = esModificar;
+            txtApellido.Enabled = esModificar;
+            numTelefono.Enabled = esModificar;
+            numEdad.Enabled = esModificar;
+            comboEspecialidad.Enabled = esModificar;
         }
 
         private void ModificarDatosMedico(object sender, EventArgs e)
         {
             // sacar al Medico de la lista de PersonasEnElHospital para que su dni no cuente
             // y el Leerdni se vuelva loco
+            string antiguoDni = this.medico.DNI;
+
             Persona p;
-            p = Program.LeerDNIExacto<Persona>(txtDNI.Text);
+            p = this.medico;
 
             Program.PersonasEnElHospital.Remove(p);
             comboBuscador.Items.Remove(p);
+            listPacientes.Items.Clear();
 
             //Consigue los datos de una persona y los aplica al paciente
             p = Persona.DarAltaPersona(txtDNI.Text, txtNombre.Text, txtApellido.Text, (int)numEdad.Value, (int)numTelefono.Value);
 
             Medico medico = new Medico(p, (Especialidades)comboEspecialidad.SelectedIndex);
 
-            medico.AñadirPacientes(listPacientes.Items.Cast<Paciente>().ToList());
+            foreach (var paci in Program.PersonasEnElHospital.OfType<Paciente>().Where(x => x.medico?.DNI == antiguoDni))
+            {
+                paci.AñadirMedico(medico);
+                listPacientes.Items.Add(paci);
+            }
 
             Program.PersonasEnElHospital.Add(medico);
             comboBuscador.Items.Add(medico);
@@ -215,16 +217,20 @@ namespace GestionHospital
             Persona p;
             p = Program.LeerDNIExacto<Persona>(txtDNI.Text);
 
-            var medico = Program.PersonasEnElHospital.OfType<Medico>()
-    .FirstOrDefault(m => m.Pacientes.Any(x => x == p));
-
-            if (medico != null)
-                medico.QuitarPaciente(paciente);
+            foreach (var paci in Program.PersonasEnElHospital.OfType<Paciente>().Where(x => x.medico == medico))
+            {
+                paci.QuitarMedico();
+                comboPaciente.Items.Add(paci);
+            }
+            comboPaciente.SelectedIndex = 0;
+            comboPaciente.DisplayMember = "Nombre";
 
             comboBuscador.Items.Remove(p);
             Program.PersonasEnElHospital.Remove(p);
             MessageBox.Show("Se ha elimiado exitosamente el paciente", "", MessageBoxButtons.OK);
             comboBuscador.SelectedIndex = 0;
+            comboBuscar_SelectedIndexChanged(sender, e);
+
         }
 
         private void butAplicar_Click(object sender, EventArgs e)
@@ -239,15 +245,16 @@ namespace GestionHospital
                 MessageBox.Show("Por favor rellena el dni, nombre, apellido, edad y la especialidad");
                 return;
             }
-
-            if (crear)
+            // Para crear medicos
+            if (esCrear)
                 DarAltaMedico(sender, e);
-
-            if (modificar)
+            // Para modificar medicos
+            if (esModificar)
                 ModificarDatosMedico(sender, e);
 
         }
 
+        // Cuando cambia el nombre que aparece en el buscador
         private void comboBuscar_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Accede a la base de datos de los pacientes y al presionar uno muestra
@@ -266,40 +273,26 @@ namespace GestionHospital
             // En caso de que tenga Pacientes
             listPacientes.Items.Clear();
 
-            if (medico.Pacientes.Count != 0)
+            var paciente = Program.PersonasEnElHospital.OfType<Paciente>().FirstOrDefault(m => m.medico == medico);
+
+            if (paciente != null)
             {
-                foreach (var pacientes in medico.Pacientes)
+                foreach (var pacientes in Program.PersonasEnElHospital.OfType<Paciente>().Where(p => p.medico == medico))
                 {
                     listPacientes.Items.Add(pacientes);
                 }
 
-                //listPacientes.DisplayMember = medico.Pacientes[0].ToString();
-
                 listPacientes.SelectedIndex = 0;
-
             }
-
         }
 
+        // Cuando cambia la especialidad que habia como principal
         private void comboEspecialidad_SelectedIndexChanged(object sender, EventArgs e)
         {
             // tiene que mostrar la especialidad que escojes
 
             comboEspecialidad.Text = comboEspecialidad.Items[comboEspecialidad.SelectedIndex].ToString();
 
-        }
-
-        private void butBorrarCita_Click(object sender, EventArgs e)
-        {
-            if(listPacientes.Items.Count == 0)
-            {
-                MessageBox.Show("No hay nada que eliminar");
-                return;
-            }
-
-            //paciente.CancelarCita((DateTime)((Cita)listPacientes.Items[listPacientes.SelectedIndex]).Fecha);
-
-            listPacientes.Items.Remove(listPacientes.Items[listPacientes.SelectedIndex]);
         }
 
         private void butAnadirPaciente_Click(object sender, EventArgs e)
@@ -318,21 +311,22 @@ namespace GestionHospital
             Paciente p = (Paciente)comboPaciente.Items[comboPaciente.SelectedIndex];
 
             // Añadimos paciente a medico y viceversa
-            medico.AñadirPaciente(p);
-            //p.medico = medico;
+            p.medico = medico;
 
             listPacientes.Items.Clear();
 
             // Añade todos los pacientes de un medico en la lista
-            foreach(var paci in medico.Pacientes)
+            foreach(var paci in Program.PersonasEnElHospital.OfType<Paciente>().Where(x => x.medico == medico))
             {
                 listPacientes.Items.Add(paci);
             }
 
             // el paciente se elimina de la lista de escoger paciente
             comboPaciente.Items.Remove(comboPaciente.Items[comboPaciente.SelectedIndex]);
-            comboPaciente.SelectedIndex = -1;
-            comboPaciente.Text = string.Empty;
+            if(comboPaciente.Items.Count > 0)
+                comboPaciente.SelectedIndex = 0;
+            else
+                comboPaciente.Text = string.Empty;
             // LLama al buscador con el identificador del medico para reiniciar la vista
             comboBuscador.SelectedIndex = comboBuscador.Items.IndexOf(medico);
         }
@@ -340,7 +334,7 @@ namespace GestionHospital
 
         private void listPacientes_DoubleClick(object sender, EventArgs e)
         {
-            if (listPacientes.SelectedItem != null)
+            if (listPacientes.SelectedItem != null && !esModificar && !esCrear)
             {
 
                 // Abrir un nuevo formulario y pasarle los detalles de la cita
@@ -349,9 +343,9 @@ namespace GestionHospital
             }
         }
 
-        private void listPacientes_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboPaciente_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
         }
     }
 }
