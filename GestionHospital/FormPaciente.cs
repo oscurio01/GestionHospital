@@ -48,6 +48,7 @@ namespace GestionHospital
                 comboMedicName.ValueMember = "DNI";
                 comboMedicName.DisplayMember = "Nombre";
             }
+
         }
 
         private void butCrear_Click(object sender, EventArgs e)
@@ -81,6 +82,7 @@ namespace GestionHospital
                 butBorrar.Enabled = true;
                 comboBuscador.Enabled = true;
                 comboBuscador.SelectedIndex = 0;
+                comboBuscar_SelectedIndexChanged(sender, e);
             }
 
             txtDNI.Enabled = crear;
@@ -154,7 +156,7 @@ namespace GestionHospital
 
         }
 
-        private void ModificarDatosPaciente()
+        private void ModificarDatosPaciente(object sender, EventArgs e)
         {
             // sacar al paciente de la lista de PersonasEnElHospital para que su dni no cuente
             // y el Leerdni se vuelva loco
@@ -162,7 +164,7 @@ namespace GestionHospital
             p = Program.LeerDNIExacto<Persona>(txtDNI.Text);
 
             Program.PersonasEnElHospital.Remove(p);
-            
+            comboBuscador.Items.Remove(p);
 
             //Consigue los datos de una persona y los aplica al paciente
             p = Persona.DarAltaPersona(txtDNI.Text, txtNombre.Text, txtApellido.Text, (int)numEdad.Value, (int)numTelefono.Value);
@@ -171,11 +173,36 @@ namespace GestionHospital
             medico.AñadirPaciente(paciente);
             Program.PersonasEnElHospital.Add(paciente);
             comboBuscador.Items.Add(paciente);
+            comboBuscador.SelectedIndex = comboBuscador.Items.IndexOf(paciente);
+
+            butModificar_Click(sender, e);
         }
 
         private void buttonBorrar_Click(object sender, EventArgs e)
         {
+            if(comboBuscador.Items.Count <= 1)
+            {
+                MessageBox.Show("Solo hay un paciente no puedes eliminar mas");
+                return;
+            }
+
             // Borra de la base de datos el paciente seleccionado
+            if(MessageBox.Show("Estas seguro de borrar a este parciente?", "Borrar paciente", MessageBoxButtons.YesNo) == DialogResult.No)
+                return;
+
+            Persona p;
+            p = Program.LeerDNIExacto<Persona>(txtDNI.Text);
+
+            var medico = Program.PersonasEnElHospital.OfType<Medico>()
+    .FirstOrDefault(m => m.Pacientes.Any(x => x == p));
+
+            if (medico != null)
+                medico.QuitarPaciente(paciente);
+
+            comboBuscador.Items.Remove(p);
+            Program.PersonasEnElHospital.Remove(p);
+            MessageBox.Show("Se ha elimiado exitosamente el paciente", "", MessageBoxButtons.OK);
+            comboBuscador.SelectedIndex = 0;
         }
 
         private void butAplicar_Click(object sender, EventArgs e)
@@ -185,7 +212,7 @@ namespace GestionHospital
 
             if (txtDNI.Text == string.Empty || txtNombre.Text == string.Empty
                 || txtApellido.Text == string.Empty || numEdad.Value <= 0
-                || comboMedicName.SelectedIndex == -1)
+                || comboMedicName.SelectedIndex == -1 || comboMedicName.Text == string.Empty)
             {
                 MessageBox.Show("Por favor rellena el dni, nombre, apellido, edad y medico");
                 return;
@@ -195,11 +222,11 @@ namespace GestionHospital
                 DarAltaPaciente(sender, e);
 
             if (modificar)
-                ModificarDatosPaciente();
+                ModificarDatosPaciente(sender, e);
 
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBuscar_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Accede a la base de datos de los pacientes y al presionar uno muestra
             // toda la informacion
@@ -217,6 +244,21 @@ namespace GestionHospital
                 comboMedicName.Text = string.Empty;
             textSintomas.Text = paciente.Sintoma;
 
+            // En caso de que tenga un historial medico
+            listCitas.Items.Clear();
+
+            if (paciente.HistorialMedico.Count != 0)
+            {
+                foreach (var citas in paciente.HistorialMedico)
+                {
+                    listCitas.Items.Add(citas);
+                    listCitas.DisplayMember = citas.ToString();
+                }
+
+                listCitas.SelectedIndex = 0;
+
+            }
+
         }
 
         private void comboMedicName_SelectedIndexChanged(object sender, EventArgs e)
@@ -225,6 +267,65 @@ namespace GestionHospital
 
             comboMedicName.Text = medico.Nombre;
 
+        }
+
+        private void butBorrarCita_Click(object sender, EventArgs e)
+        {
+            if(listCitas.Items.Count == 0)
+            {
+                MessageBox.Show("No hay nada que eliminar");
+                return;
+            }
+
+            paciente.CancelarCita((DateTime)((Cita)listCitas.Items[listCitas.SelectedIndex]).Fecha);
+
+            listCitas.Items.Remove(listCitas.Items[listCitas.SelectedIndex]);
+        }
+
+        private void butCrearCita_Click(object sender, EventArgs e)
+        {
+            if(paciente == null)
+            {
+                MessageBox.Show("No has elegido ningun paciente");
+                return;
+            }
+
+            if (paciente.medico == null)
+            {
+                MessageBox.Show("Ahora mismo no hay un medico operable, por favor de de alta a un medico y asigneselo");
+                return;
+            }
+
+
+            FormCitas formCitas = new FormCitas(paciente);
+
+            formCitas.ShowDialog();
+
+            listCitas.Items.Clear();
+
+            foreach(var citas in paciente.HistorialMedico)
+            {
+                listCitas.Items.Add(citas);
+            }
+
+            comboBuscador.SelectedIndex = comboBuscador.Items.IndexOf(paciente);
+        }
+
+
+        private void listCitas_DoubleClick(object sender, EventArgs e)
+        {
+            if (listCitas.SelectedItem != null)
+            {
+
+                // Abrir un nuevo formulario y pasarle los detalles de la cita
+                FormCitas formCita = new FormCitas(paciente, (Cita)listCitas.Items[listCitas.SelectedIndex], true);
+                formCita.Show();
+            }
+        }
+
+        private void listCitas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtNotas.Text = ((Cita)listCitas.Items[listCitas.SelectedIndex]).Notas;
         }
     }
 }

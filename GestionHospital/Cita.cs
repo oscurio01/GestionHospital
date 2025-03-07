@@ -13,7 +13,7 @@ namespace GestionHospital
         public DateTime? Fecha { get; set; }
         public string Diagnostico { get; set; }
         public string Tratamiento { get; set; }
-        public List<string> Notas { get; set; } = new List<string>();
+        public string Notas { get; set; }
 
         public Cita(Paciente paciente, Medico medico, DateTime fecha)
         {
@@ -60,11 +60,6 @@ namespace GestionHospital
             Diagnostico = diagnostico;
             Tratamiento = tratamiento;
             
-        }
-
-        public void AgregarNota(string nota)
-        {
-            Notas.Add(nota);
         }
 
     }

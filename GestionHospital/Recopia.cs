@@ -683,7 +683,7 @@ Que quieres hacer?
             if (eleccion == 1)
             {
                 string nota = Console.ReadLine();
-                cita.Notas.Add(nota);
+                cita.Notas = nota;
             }
 
             paciente.RegistrarHistorial(cita);
@@ -750,7 +750,7 @@ Que quieres hacer?
                     break;
                 case 3:
                     string nota = Console.ReadLine();
-                    paciente.HistorialMedico.FirstOrDefault(c => c.Fecha == fecha).AgregarNota(nota);
+                    paciente.HistorialMedico.FirstOrDefault(c => c.Fecha == fecha).Notas += nota;
                     break;
             }
 
