@@ -29,50 +29,51 @@
         private void InitializeComponent()
         {
             this.Paciente = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
+            this.butMedico = new System.Windows.Forms.Button();
+            this.butPersAdm = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Paciente
             // 
-            this.Paciente.Location = new System.Drawing.Point(19, 10);
-            this.Paciente.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Paciente.Location = new System.Drawing.Point(25, 12);
+            this.Paciente.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Paciente.Name = "Paciente";
-            this.Paciente.Size = new System.Drawing.Size(75, 31);
+            this.Paciente.Size = new System.Drawing.Size(100, 38);
             this.Paciente.TabIndex = 1;
             this.Paciente.Text = "Paciente";
             this.Paciente.UseVisualStyleBackColor = true;
             this.Paciente.Click += new System.EventHandler(this.Paciente_Click);
             // 
-            // button3
+            // butMedico
             // 
-            this.button3.Location = new System.Drawing.Point(127, 10);
-            this.button3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(70, 31);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "medico";
-            this.button3.UseVisualStyleBackColor = true;
+            this.butMedico.Location = new System.Drawing.Point(169, 12);
+            this.butMedico.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.butMedico.Name = "butMedico";
+            this.butMedico.Size = new System.Drawing.Size(93, 38);
+            this.butMedico.TabIndex = 2;
+            this.butMedico.Text = "medico";
+            this.butMedico.UseVisualStyleBackColor = true;
+            this.butMedico.Click += new System.EventHandler(this.butMedico_Click);
             // 
-            // button9
+            // butPersAdm
             // 
-            this.button9.Location = new System.Drawing.Point(232, 10);
-            this.button9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(135, 31);
-            this.button9.TabIndex = 8;
-            this.button9.Text = "Personal administrativo";
-            this.button9.UseVisualStyleBackColor = true;
+            this.butPersAdm.Location = new System.Drawing.Point(309, 12);
+            this.butPersAdm.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.butPersAdm.Name = "butPersAdm";
+            this.butPersAdm.Size = new System.Drawing.Size(180, 38);
+            this.butPersAdm.TabIndex = 8;
+            this.butPersAdm.Text = "Personal administrativo";
+            this.butPersAdm.UseVisualStyleBackColor = true;
             // 
             // Menu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 366);
-            this.Controls.Add(this.button9);
-            this.Controls.Add(this.button3);
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.butPersAdm);
+            this.Controls.Add(this.butMedico);
             this.Controls.Add(this.Paciente);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Menu";
             this.Text = "Menu";
             this.ResumeLayout(false);
@@ -81,7 +82,7 @@
 
         #endregion
         private System.Windows.Forms.Button Paciente;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button butMedico;
+        private System.Windows.Forms.Button butPersAdm;
     }
 }

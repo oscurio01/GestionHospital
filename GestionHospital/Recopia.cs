@@ -25,17 +25,17 @@ namespace GestionHospital
 ==========================================
 1. Dar de alta un medico
 2. Modificar medico
-3. Dar de alta un paciente
-4. Modificar paciente
+3. Dar de alta un paciente ~
+4. Modificar paciente ~
 5. Dar de alta un personal administativo
 6. Modificar personal administrativo
 7. Listar los medicos
 8. Listar los paciente de un medico 
-9. Dar de baja un paciente
+9. Dar de baja un paciente ~ 
 10. Dar de baja personal administrativo
 11. Dar de baja un medico
-12. Ver la lista de personas en el hospital
-13. Gestion de citas
+12. Ver la lista de personas en el hospital~ 
+13. Gestion de citas ~
 0. Para salir
 ==========================================
 ");

@@ -22,5 +22,11 @@ namespace GestionHospital
             FormPaciente formPaciente = new FormPaciente();
             formPaciente.ShowDialog();
         }
+
+        private void butMedico_Click(object sender, EventArgs e)
+        {
+            FormMedico formMedico = new FormMedico();
+            formMedico.ShowDialog();
+        }
     }
 }

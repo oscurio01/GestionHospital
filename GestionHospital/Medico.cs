@@ -43,6 +43,7 @@ namespace GestionHospital
         public void AñadirPaciente(Paciente paciente)
         {
             Pacientes.Add(paciente);
+            paciente.medico = this;
         }
         public void AñadirPacientes(List<Paciente> pacientes)
         {

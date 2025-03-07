@@ -25,6 +25,7 @@ namespace GestionHospital
         static void Main()
         {
             ((Paciente)PersonasEnElHospital[2]).medico = (Medico)PersonasEnElHospital[0];
+            ((Medico)PersonasEnElHospital[0]).AñadirPaciente((Paciente)PersonasEnElHospital[2]);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

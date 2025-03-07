@@ -27,6 +27,7 @@ namespace GestionHospital
         public void AñadirMedico(Medico medico)
         {
             this.medico = medico;
+            this.medico.AñadirPaciente(this);
         }
 
         public void QuitarMedico()
@@ -36,7 +37,7 @@ namespace GestionHospital
 
         public override string ToString()
         {
-            return base.ToString() + (medico != null ? $", Sintomas {Sintoma} y tiene como medico: {medico.Nombre}." : $", Sintomas {Sintoma}.");
+            return base.ToString() + (medico != null ? $", Sintomas: {Sintoma} y tiene como medico: {medico.Nombre}." : $", Sintomas: {Sintoma}.");
         }
 
         public void RegistrarHistorial(Cita historialMedico)

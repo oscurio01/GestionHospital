@@ -37,7 +37,7 @@ namespace GestionHospital
             string texto = $"Cita {Fecha}, El paciente {Paciente.Nombre} con medico {Medico.Nombre}";
             if(Diagnostico != string.Empty)
             {
-                texto += $" Diagnostico {Diagnostico} y tratamiento {Tratamiento}";
+                texto += $" Diagnostico: {Diagnostico} y tratamiento: {Tratamiento}";
             }
             return texto;
         }
