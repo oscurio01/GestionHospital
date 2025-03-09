@@ -85,7 +85,8 @@ namespace GestionHospital
                 butCrearCita.Enabled = true;
                 butBorrarCita.Enabled = true;
                 comboBuscador.Enabled = true;
-                comboBuscador.SelectedIndex = 0;
+                if(comboBuscador.Items.Count > 0)
+                    comboBuscador.SelectedIndex = 0;
                 comboBuscar_SelectedIndexChanged(sender, e);
             }
 
@@ -234,7 +235,9 @@ namespace GestionHospital
         {
             // Accede a la base de datos de los pacientes y al presionar uno muestra
             // toda la informacion
-            
+            if (comboBuscador.Items.Count == 0)
+                return;
+
             paciente = Program.LeerDNIExacto<Paciente>(((Paciente)comboBuscador.Items[comboBuscador.SelectedIndex]).DNI);
 
             txtDNI.Text = paciente.DNI;

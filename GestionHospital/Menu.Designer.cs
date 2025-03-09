@@ -28,22 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Paciente = new System.Windows.Forms.Button();
             this.butMedico = new System.Windows.Forms.Button();
             this.butPersAdm = new System.Windows.Forms.Button();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabControl1.SuspendLayout();
+            this.dataGridPersonas = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridPersonas)).BeginInit();
             this.SuspendLayout();
             // 
             // Paciente
             // 
-            this.Paciente.Location = new System.Drawing.Point(19, 10);
-            this.Paciente.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Paciente.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Paciente.Location = new System.Drawing.Point(22, 65);
+            this.Paciente.Margin = new System.Windows.Forms.Padding(2);
             this.Paciente.Name = "Paciente";
-            this.Paciente.Size = new System.Drawing.Size(75, 31);
+            this.Paciente.Size = new System.Drawing.Size(131, 70);
             this.Paciente.TabIndex = 1;
             this.Paciente.Text = "Paciente";
             this.Paciente.UseVisualStyleBackColor = true;
@@ -51,10 +50,12 @@
             // 
             // butMedico
             // 
-            this.butMedico.Location = new System.Drawing.Point(127, 10);
-            this.butMedico.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.butMedico.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.butMedico.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.butMedico.Location = new System.Drawing.Point(346, 65);
+            this.butMedico.Margin = new System.Windows.Forms.Padding(2);
             this.butMedico.Name = "butMedico";
-            this.butMedico.Size = new System.Drawing.Size(70, 31);
+            this.butMedico.Size = new System.Drawing.Size(127, 70);
             this.butMedico.TabIndex = 2;
             this.butMedico.Text = "medico";
             this.butMedico.UseVisualStyleBackColor = true;
@@ -62,70 +63,51 @@
             // 
             // butPersAdm
             // 
-            this.butPersAdm.Location = new System.Drawing.Point(232, 10);
-            this.butPersAdm.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.butPersAdm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.butPersAdm.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.butPersAdm.Location = new System.Drawing.Point(666, 65);
+            this.butPersAdm.Margin = new System.Windows.Forms.Padding(2);
             this.butPersAdm.Name = "butPersAdm";
-            this.butPersAdm.Size = new System.Drawing.Size(135, 31);
+            this.butPersAdm.Size = new System.Drawing.Size(193, 70);
             this.butPersAdm.TabIndex = 8;
             this.butPersAdm.Text = "Personal administrativo";
             this.butPersAdm.UseVisualStyleBackColor = true;
+            this.butPersAdm.Click += new System.EventHandler(this.butPersAdm_Click);
             // 
-            // tabControl1
+            // dataGridPersonas
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Location = new System.Drawing.Point(12, 133);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(582, 221);
-            this.tabControl1.TabIndex = 9;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(574, 195);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Paciente";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(574, 195);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Medico";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(574, 195);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Pers. Admin.";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.dataGridPersonas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridPersonas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridPersonas.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridPersonas.Location = new System.Drawing.Point(22, 300);
+            this.dataGridPersonas.Name = "dataGridPersonas";
+            this.dataGridPersonas.Size = new System.Drawing.Size(851, 193);
+            this.dataGridPersonas.TabIndex = 11;
+            this.dataGridPersonas.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPersonal_CellEnter);
+            this.dataGridPersonas.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridViewPersonal_CellFormatting);
             // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 366);
-            this.Controls.Add(this.tabControl1);
+            this.ClientSize = new System.Drawing.Size(885, 505);
+            this.Controls.Add(this.dataGridPersonas);
             this.Controls.Add(this.butPersAdm);
             this.Controls.Add(this.butMedico);
             this.Controls.Add(this.Paciente);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Menu";
             this.Text = "Menu";
-            this.tabControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridPersonas)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -134,9 +116,6 @@
         private System.Windows.Forms.Button Paciente;
         private System.Windows.Forms.Button butMedico;
         private System.Windows.Forms.Button butPersAdm;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.DataGridView dataGridPersonas;
     }
 }

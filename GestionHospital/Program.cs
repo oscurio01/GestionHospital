@@ -17,7 +17,10 @@ namespace GestionHospital
             new Medico("5552233B", 35, "Paco", "Gafotas", 699999999, Especialidades.MedicoGeneral),
             new Paciente("12", 12, "fermin", "galgo", 633443344, "Dolor cabeza"),
             new Paciente("º1", 89, "Franco", "Olvidado", 687442233, "Disparo en la cabeza"),
-            new Medico("º123", 35, "Fran", "Gafotas", 0134, Especialidades.Hematologo)
+            new Medico("º123", 35, "Fran", "Gafotas", 0134, Especialidades.Hematologo),
+            new Medico("838J", 35, "Carla", "Gafotas", 01321, Especialidades.Oftanmologo),
+            new Paciente("99933K", 89, "Jessie", "Olvidada", 687443233, "Hematomas en la cabeza"),
+            new PersonalAdministrativo(new Persona("88D", 33, "Aitor", "Menta", 632223939), CargoAdministrativo.coordinador, "Aborto", "12PM-1AM")
         };
 
 

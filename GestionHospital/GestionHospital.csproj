@@ -53,6 +53,12 @@
     <Compile Include="FormCitas.Designer.cs">
       <DependentUpon>FormCitas.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormPersAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPersAdmin.Designer.cs">
+      <DependentUpon>FormPersAdmin.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormMedico.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +86,9 @@
     <Compile Include="Recopia.cs" />
     <EmbeddedResource Include="FormCitas.resx">
       <DependentUpon>FormCitas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPersAdmin.resx">
+      <DependentUpon>FormPersAdmin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMedico.resx">
       <DependentUpon>FormMedico.cs</DependentUpon>

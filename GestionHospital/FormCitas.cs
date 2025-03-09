@@ -47,7 +47,7 @@ namespace GestionHospital
 
         private void butAplicar_Click(object sender, EventArgs e)
         {
-            if (txtDiagnostico.Text == null || txtTratamiento.Text == null)
+            if (txtDiagnostico.Text == string.Empty || txtTratamiento.Text == string.Empty)
             {
                 MessageBox.Show("Por favor rellena los campos");
                 return;
@@ -64,5 +64,6 @@ namespace GestionHospital
 
             Close();
         }
+
     }
 }

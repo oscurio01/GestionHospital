@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.comboBuscador = new System.Windows.Forms.ComboBox();
             this.butCrear = new System.Windows.Forms.Button();
             this.butBorrar = new System.Windows.Forms.Button();
@@ -286,21 +287,31 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridPaciente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridPaciente.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridPaciente.Location = new System.Drawing.Point(10, 331);
             this.dataGridPaciente.Name = "dataGridPaciente";
             this.dataGridPaciente.ReadOnly = true;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridPaciente.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridPaciente.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridPaciente.ShowCellErrors = false;
             this.dataGridPaciente.Size = new System.Drawing.Size(773, 103);
             this.dataGridPaciente.TabIndex = 29;
             this.dataGridPaciente.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridPaciente_CellDoubleClick);
+            this.dataGridPaciente.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridPaciente_CellEnter);
+            this.dataGridPaciente.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridPaciente_CellFormatting);
             // 
             // FormMedico
             // 
@@ -330,7 +341,7 @@
             this.Controls.Add(this.comboBuscador);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormMedico";
-            this.Text = "Administrar";
+            this.Text = "Medicos";
             this.Load += new System.EventHandler(this.FormPaciente_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numEdad)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTelefono)).EndInit();

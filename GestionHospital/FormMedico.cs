@@ -15,7 +15,6 @@ namespace GestionHospital
         bool esCrear = false;
         bool esModificar = false;
 
-        Paciente paciente {  get; set; }
         Medico medico { get; set; }
 
         BindingList<Paciente> listaPacientes = new BindingList<Paciente>();
@@ -38,7 +37,25 @@ namespace GestionHospital
             {
                 comboEspecialidad.Items.Add(esp);
             }
+
+            RecargarDatosDelPaciente();
         }
+        void RecargarDatosDelPaciente()
+        {
+            var listaConTipo = listaPacientes.Select(p => new
+            {
+                DNI = p.DNI,
+                Nombre = p.Nombre,
+                Apellido = p.Apellido,
+                Edad = p.Edad,
+                Telefono = p.Telefono,
+                Sintoma = p.Sintoma 
+            }).ToList();
+
+            // Asignamos la lista al DataGridView
+            dataGridPaciente.DataSource = listaConTipo;
+        }
+
         private void FormPaciente_Load(object sender, EventArgs e)
         {
             if (comboBuscador.Items.Count != 0)
@@ -51,7 +68,7 @@ namespace GestionHospital
                 comboBuscador.SelectedIndex = 0;
             }
 
-            if(comboEspecialidad.Items.Count != 0)
+            if(comboEspecialidad.Items.Count != 0 && comboBuscador.Items.Count != 0)
             {
                 comboEspecialidad.SelectedIndex = (int)((Medico)comboBuscador.Items[comboBuscador.SelectedIndex]).Especialidad;
             }
@@ -63,12 +80,8 @@ namespace GestionHospital
             }
 
             // Ajustar las columnas de los pacientes
-            dataGridPaciente.Columns["DNI"].DisplayIndex = 0;
-            dataGridPaciente.Columns["Nombre"].DisplayIndex = 1;
-            dataGridPaciente.Columns["Apellido"].DisplayIndex = 2;
-            dataGridPaciente.Columns["Edad"].DisplayIndex = 3;
-            dataGridPaciente.Columns["Telefono"].DisplayIndex = 4;
-            dataGridPaciente.Columns["Sintoma"].DisplayIndex = 5;
+
+            RecargarDatosDelPaciente();
         }
 
         private void butCrear_Click(object sender, EventArgs e)
@@ -109,7 +122,8 @@ namespace GestionHospital
                 comboPaciente.Enabled = true;
                 if(comboPaciente.Items.Count > 0)
                     comboPaciente.SelectedIndex = 0;
-                comboBuscador.SelectedIndex = 0;
+                if(comboBuscador.Items.Count > 0)
+                    comboBuscador.SelectedIndex = 0;
                 comboBuscar_SelectedIndexChanged(sender, e);
             }
 
@@ -120,7 +134,7 @@ namespace GestionHospital
             numEdad.Enabled = esCrear;
             comboEspecialidad.Enabled = esCrear;
             // Actualiza las columnas de pacientes
-            dataGridPaciente.DataSource = listaPacientes;
+            RecargarDatosDelPaciente();
         }
 
         private void DarAltaMedico(object sender, EventArgs e)
@@ -211,7 +225,7 @@ namespace GestionHospital
             comboBuscador.SelectedIndex = comboBuscador.Items.IndexOf(medico);
 
             // Actualiza las columnas de pacientes
-            dataGridPaciente.DataSource = listaPacientes;
+            RecargarDatosDelPaciente();
 
             butModificar_Click(sender, e);
         }
@@ -273,7 +287,9 @@ namespace GestionHospital
         {
             // Accede a la base de datos de los pacientes y al presionar uno muestra
             // toda la informacion
-            
+            if (comboBuscador.Items.Count == 0)
+                return;
+
             medico = Program.LeerDNIExacto<Medico>(((Medico)comboBuscador.Items[comboBuscador.SelectedIndex]).DNI);
 
             txtDNI.Text = medico.DNI;
@@ -297,9 +313,8 @@ namespace GestionHospital
                 }
 
                 // Actualiza las columnas de pacientes
-                dataGridPaciente.DataSource = listaPacientes;
-
             }
+            RecargarDatosDelPaciente();
         }
 
         // Cuando cambia la especialidad que habia como principal
@@ -337,7 +352,7 @@ namespace GestionHospital
                 listaPacientes.Add(paci);
             }
             // Actualiza las columnas de pacientes
-            dataGridPaciente.DataSource = listaPacientes;
+            RecargarDatosDelPaciente();
 
             // el paciente se elimina de la lista de escoger paciente
             comboPaciente.Items.Remove(comboPaciente.Items[comboPaciente.SelectedIndex]);
@@ -354,6 +369,21 @@ namespace GestionHospital
                 return;
             FormPaciente formPaciente = new FormPaciente();
             formPaciente.ShowDialog();
+        }
+
+        private void dataGridPaciente_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                dataGridPaciente.InvalidateRow(e.RowIndex);
+                dataGridPaciente.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                dataGridPaciente.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            }
+        }
+
+        private void dataGridPaciente_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            dataGridPaciente.BackgroundColor = Color.White;
         }
     }
 }
