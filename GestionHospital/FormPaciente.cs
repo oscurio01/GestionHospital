@@ -178,6 +178,11 @@ namespace GestionHospital
 
             Paciente paciente = new Paciente(p, textSintomas.Text, medico);
 
+            foreach(var cita in antiguoPaciente.HistorialMedico)
+            {
+                paciente.RegistrarHistorial(cita);
+            }
+
             Program.PersonasEnElHospital.Add(paciente);
             comboBuscador.Items.Add(paciente);
             comboBuscador.SelectedIndex = comboBuscador.Items.IndexOf(paciente);

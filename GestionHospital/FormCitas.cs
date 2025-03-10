@@ -28,10 +28,12 @@ namespace GestionHospital
         private void FormCitas_Load(object sender, EventArgs e)
         {
             txtCitaPaciente.Text = Paciente.Nombre;
-            txtCitaMedico.Text = Paciente.medico.Nombre;
+            txtCitaMedico.Text = Paciente.medico?.Nombre;
 
             if (verCita)
             {
+                txtCitaMedico.Text = cita.Medico.Nombre;
+
                 txtTratamiento.Text = cita.Tratamiento;
                 txtDiagnostico.Text = cita.Diagnostico;
                 txtNotas.Text = cita.Notas;
